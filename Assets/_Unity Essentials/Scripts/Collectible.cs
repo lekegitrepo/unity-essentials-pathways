@@ -3,6 +3,7 @@ using UnityEngine;
 public class Collectible : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed = 0.5f;
+    [SerializeField] private GameObject onCollectEffect;
     // Update is called once per frame
     private void Update()
     {
@@ -11,6 +12,10 @@ public class Collectible : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
+        if (other.CompareTag("Vacuum"))
+        {
+            Destroy(gameObject);
+            Instantiate(onCollectEffect, transform.position, transform.rotation);
+        }
     }
 }
